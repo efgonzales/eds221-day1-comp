@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE) #echo makes code show up for entire doc when knitted, no messages/warnings will show up for entire doc.
 library(tidyverse)
 library(here)
 library(janitor)
@@ -49,11 +49,12 @@ names(toolik_weather)
 I don't want to deal with those capital letters. These aren't even bad looking column names, but let's clean them up a bit. 
 
 ```{r}
-toolik_weather <- toolik_weather %>% clean_names() # What does this do? Say it in words.
+toolik_weather <- toolik_weather %>% clean_names() # What does this do? Say it in words. : Take an object AND THEN clean the names into snake case...
 
 # What is this %>% thing? Meet the pipe operator! Also, as of a couple months ago, |> is a native pipe operator (versus %>%, which comes along with the tidyverse)
 
 # Now what are the column names?
+ 
 ```
 
 ```{r}
@@ -72,7 +73,7 @@ toolik_temp_plot <- ggplot(data = toolik_weather, aes(x = as.factor(month), y = 
   theme_minimal() +
   labs(title = "Toolik Station daily air temperature",
        x = "Month",
-       y = "Daily mean air temperatures (Celsius)")
+       y = "Daily mean air temperatures (C)")
 
 toolik_temp_plot
 ```
@@ -80,7 +81,7 @@ toolik_temp_plot
 ## Export a figure
 
 ```{r}
-ggsave(here::here("figs", "toolik_temp_plot.png"), height = 6, width = 7)
+ggsave(here::here("figs", "toolik_temp_plot.png"), height = 6, width = 7) #saves LAST created graph, unless you specify plot = "name of plot"
 ```
 
 Now try changing something about the ggplot code, and re-run your `ggsave()` line above. Does your saved figure change? Great! 
